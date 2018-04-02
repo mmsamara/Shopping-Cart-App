@@ -1,0 +1,351 @@
+﻿@using MuhammadShoppingCart.Models;
+@using MuhammadShoppingCart.Helper;
+<!DOCTYPE html>
+<html>
+<head>
+        <title>Muhammad's Watch Website</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="Watches Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+
+        <link href="~/css/bootstrap.css" rel='stylesheet' type='text/css' />
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <!-- Custom Theme files -->
+        <link href="~/css/style.css" rel='stylesheet' type='text/css' />
+        <!-- Custom Theme files -->
+        <!--webfont-->
+        <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Dorsa' rel='stylesheet' type='text/css'>
+
+        <!--Favicon-->
+        <link rel="icon" type="image/png" href="~/images/thinkings.png" />
+        
+        <!-- start menu -->
+        <link href="~/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+
+        <!-- Sweet Alert-->
+        <link href="~/Content/sweetalert.css" rel="stylesheet" />
+
+        <!-- My Custom CSS-->
+        <link href="~/Content/Customcss.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="men_banner">
+        <div class="container">
+            <div class="header_top">
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="header_top_left">
+                        <div class="box_11">
+                            <a href="@Url.Action("Index", "ShoppingCarts")">
+                                <h4><p>Cart: <span>$@CartHelper.CalcCartTotal()</span> (<span>@CartHelper.CartCount()</span> items)</p><img src="images/bag.png" alt="" /><div class="clearfix"> </div></h4></a>
+                        </div>
+                        @*<p class="pull-left">@Html.ActionLink("Order History", "Index", "Orders")</p>*@
+                        <p class="empty pull-left"><a href="@Url.Action("Index","Orders")">Order History (@OrderHelper.OrderHistoryCount())</a></p>
+                        <p class="empty"><a href="@Url.Action("DeleteAll", "ShoppingCarts")" class="simpleCart_empty">Empty Cart</a></p>
+                        <div class="clearfix"> </div>
+                    </div>
+                }
+                
+                <div class="header_top_right">
+                    <div class="lang_list">
+                        <select tabindex="4" class="dropdown">
+                            <option value="" class="label" value="">$ Us</option>
+                            <option value="1">Dollar</option>
+                            <option value="2">Euro</option>
+                        </select>
+                    </div>
+                    <ul class="header_user_info">
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                                <a class="login" href="@Url.Action("LogIn", "Account")">
+                                    <i class="user"> </i>
+                                    <li class="user_desc">Log In</li>
+                                </a>
+                        }
+                        else
+                        {
+                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <i class="user"> </i>
+                                <li class="user_desc"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                            }
+
+                        }
+
+                        <div class="clearfix"> </div>
+                    </ul>
+                    </div>
+                    <!-- start search-->
+                    <div class="search-box">
+                        <div id="sb-search" class="sb-search">
+                            <form>
+                                <input class="sb-search-input" placeholder="Coming Soon!" type="search" name="search" id="search">
+                                <input class="sb-search-submit" type="submit" value="">
+                                <span class="sb-icon-search"> </span>
+                            </form>
+                        </div>
+                    </div>
+                    <!----search-scripts---->
+
+                    <!----//search-scripts---->
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="clearfix"> </div>
+
+            <div class="header_bottom">
+                <div class="logo">
+                    @*The Url action tells me take me to Index action and Home Controller. We used this instead of HTML.Action so we didn't replace whole link*@
+                    <h1><a href="@Url.Action("Index", "Home")"><span class="m_1">W</span>atches</a></h1>
+                </div>
+                
+                @{
+                    var db = new ApplicationDbContext();
+                    var mensCnt = db.Items.Where(i => i.Gender == "M").Count();
+                    var womensCnt = db.Items.Where(i => i.Gender == "W").Count();
+                    var sportsCnt = db.Items.Where(i => i.Gender == "S").Count();
+
+
+                    var mensThree = db.Items.Where(i => i.Gender == "M").Take(3).ToList();
+                    var womensThree = db.Items.Where(i => i.Gender == "W").Take(3).ToList();
+                    var sportsThree = db.Items.Where(i => i.Gender == "S").Take(3).ToList();
+
+                    var mensTwo = db.Items.Where(i => i.Gender == "M").Take(2).ToList();
+                    var womensOne = db.Items.Where(i => i.Gender == "W").Take(1).ToList();
+                }
+
+                <div class="menu">
+                    <ul class="megamenu skyblue">
+                        <li>
+                            <a class="color2" href="#">All Watches</a>
+                            <div class="megapanel">
+                                <div class="row">
+                                    <div class="col1">
+                                        <div class="h_nav">
+                                            <h4>Watches</h4>
+                                            <ul>
+                                                <li><a href="@Url.Action("Index", "Items")">All (@db.Items.Count())</a></li>
+                                                <li><a href="@Url.Action("MensIndex", "Items")">Mens (@mensCnt)</a></li>
+                                                <li><a href="@Url.Action("WomensIndex", "Items")">Womens (@womensCnt)</a></li>
+                                                <li><a href="@Url.Action("SportsIndex", "Items")">Sport (@sportsCnt)</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col2">
+                                        <div class="h_nav">
+                                            <h4>Trends</h4>
+                                            <ul>
+                                                @foreach (var watch in mensTwo)
+                                                {
+                                                    <li class>
+                                                        <div class="p_left">
+                                                            <a href="@Url.Action("Details", "Items", new {id = watch.Id })"><img src="@Url.Content(watch.MediaUrl)" height="60" width="80" class="img-responsive" /></a>
+                                                        </div>
+                                                        <div class="p_right">
+                                                            <h4><a href="@Url.Action("Details", "Items", new {id = watch.Id })">@watch.Name</a></h4>
+                                                            <span class="item-cat"><small><a href="@Url.Action("Details", "Items", new {id = watch.Id })">watches</a></small></span>
+                                                            <span class="price">$@watch.Price</span>
+                                                        </div>
+                                                        <div class="clearfix"> </div>
+                                                    </li>
+                                                }
+                                                @foreach (var watch in womensOne)
+                                                {
+                                                    <li class>
+                                                        <div class="p_left">
+                                                            <a href="@Url.Action("Details", "Items", new {id = watch.Id })"><img src="@Url.Content(watch.MediaUrl)" height="60" width="80" class="img-responsive" /></a>
+                                                        </div>
+                                                        <div class="p_right">
+                                                            <h4><a href="@Url.Action("Details", "Items", new {id = watch.Id })">@watch.Name</a></h4>
+                                                            <span class="item-cat"><small><a href="@Url.Action("Details", "Items", new {id = watch.Id })">watches</a></small></span>
+                                                            <span class="price">$@watch.Price</span>
+                                                        </div>
+                                                        <div class="clearfix"> </div>
+                                                    </li>
+                                                }
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="color2" href="#">Mens</a>
+                            <div class="megapanel">
+                                <div class="row">
+                                    <div class="col1">
+                                        <div class="h_nav">
+                                            <h4>Men</h4>
+                                            <ul>
+                                                <li><a href="@Url.Action("MensIndex", "Items")">Watches (@mensCnt)</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                    <div class="col2">
+                                        <div class="h_nav">
+                                            <h4>Trends</h4>
+                                            <ul>
+                                                @foreach (var watch in mensThree)
+                                                {
+                                                    <li class>
+                                                        <div class="p_left">
+                                                            <a href="@Url.Action("Details", "Items", new {id = watch.Id })"><img src="@Url.Content(watch.MediaUrl)" height="60" width="80" class="img-responsive" /></a>
+                                                        </div>
+                                                        <div class="p_right">
+                                                            <h4><a href="@Url.Action("Details", "Items", new {id = watch.Id })">@watch.Name</a></h4>
+                                                            <span class="item-cat"><small><a >watches</a></small></span>
+                                                            <span class="price">$@watch.Price</span>
+                                                        </div>
+                                                        <div class="clearfix"> </div>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="color4" href="#">Womens</a>
+                            <div class="megapanel">
+                                <div class="row">
+                                    <div class="col1">
+                                        <div class="h_nav">
+                                            <h4>Women</h4>
+                                            <ul>
+                                                <li><a href="@Url.Action("WomensIndex", "Items")">Watches (@womensCnt)</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="h_nav">
+                                            <h4>Trends</h4>
+                                            <ul>
+                                                @foreach (var watch in womensThree)
+                                                {
+                                                    <li class>
+                                                        <div class="p_left">
+                                                            <a href="@Url.Action("Details", "Items", new {id = watch.Id })"><img src="@Url.Content(watch.MediaUrl)" height="60" width="80" class="img-responsive" /></a>
+                                                        </div>
+                                                        <div class="p_right">
+                                                            <h4><a href=""@Url.Action("Details", "Items", new {id = watch.Id })"">@watch.Name</a></h4>
+                                                            <span class="item-cat"><small><a href="@Url.Action("Details", "Items", new {id = watch.Id })">watches</a></small></span>
+                                                            <span class="price">$@watch.Price</span>
+                                                        </div>
+                                                        <div class="clearfix"> </div>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="color2" href="#">Sport</a>
+                            <div class="megapanel">
+                                <div class="row">
+                                    <div class="col1">
+                                        <div class="h_nav">
+                                            <h4>Sport</h4>
+                                            <ul>
+                                                <li><a href="@Url.Action("Index", "Items")">Watches (@sportsCnt)</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col2">
+                                        <div class="h_nav">
+                                            <h4>Trends</h4>
+                                            <ul>
+                                                @foreach (var watch in sportsThree)
+                                                {
+                                                    <li class>
+                                                        <div class="p_left">
+                                                            <a href="@Url.Action("Details", "Items", new {id = watch.Id })"><img src="@Url.Content(watch.MediaUrl)" height="60" width="80" class="img-responsive" /></a>
+                                                        </div>
+                                                        <div class="p_right">
+                                                            <h4><a href="@Url.Action("Details", "Items", new {id = watch.Id })">@watch.Name</a></h4>
+                                                            <span class="item-cat"><small><a href="@Url.Action("Details", "Items", new {id = watch.Id })">watches</a></small></span>
+                                                            <span class="price">$@watch.Price</span>
+                                                        </div>
+                                                        <div class="clearfix"> </div>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a class="color7" href="http://www.watchville.com/" target="_blank">News</a></li>
+                        <div class="clearfix"> </div>
+                    </ul>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+            @*This one liner says render my entire index view here. This is how they get shoe horned into the layout*@
+            @RenderBody()
+            <hr />
+            <div class="footer">
+                <div class="container">
+                    <div class="cssmenu">
+                        <ul>
+                            <li><a href=@Url.Action("Index","Items")>Shop</a></li>
+                            <li class="page-scroll"><a href="http://msamara-shoppingcart.azurewebsites.net#Welcome">About</a></li>
+                            <li><a href="https://www.linkedin.com/in/muhammadsamara/" target="_blank">Contact</a></li>
+                        </ul>
+                    </div>
+                    <ul class="social">
+                        <li><a> <i class="instagram"> </i> </a></li>
+                        <li><a><i class="fb"> </i> </a></li>
+                        <li><a><i class="tw"> </i> </a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                    <div class="copy">
+                        <p> &copy; All Rights Reserved | Template by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> | Site by Muhammad Samara</p>
+                    </div>
+                </div>
+            </div>
+
+            @*Used by the template.. leave alone for now.*@
+            <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+            <script type="text/javascript" src="~/js/jquery-1.11.1.min.js"></script>
+            <script src="~/Scripts/bootstrap.min.js"></script>
+            <script type="text/javascript" src="~/js/megamenu.js"></script>
+            <script>$(document).ready(function () { $(".megamenu").megamenu(); });</script>
+            <script src="~/js/jquery.easydropdown.js"></script>
+            <script src="~/js/simpleCart.min.js"> </script>
+            <script src="~/js/classie.js"></script>
+            <script src="~/js/classie1.js"></script>
+            <script src="~/js/uisearch.js"></script>
+            <script>
+            new UISearch(document.getElementById('sb-search'));
+            </script>
+            <script src="~/Scripts/sweetalert.min.js"></script>
+
+        </div>
+
+        @*@Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")*@
+        @RenderSection("scripts", required: false)
+</body>
+</html>

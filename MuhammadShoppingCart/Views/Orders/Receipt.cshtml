@@ -1,0 +1,70 @@
+﻿@model MuhammadShoppingCart.Models.Order
+
+<div class="container">
+    <div class="grid_1">
+        <br />
+        <div class="row">  
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <h1 class="text-left">Receipt</h1>
+                <p class="text-left">Thank you for shopping at MMS Watches!</p>
+            </div>
+            <div class="col-md-7"></div>
+        </div>
+        <div class="row">  
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <h4 class="text-left">First Name: </h4>
+                <h4 class="text-left">Address: </h4>
+                <h4 class="phone_desc text-left">City: </h4>
+                <h4 class="phone_desc text-left">State: </h4>
+                <h4 class="phone_desc text-left">Zip Code: </h4>
+                <h4 class="phone_desc text-left">Country: </h4>
+            </div>
+            <div class="col-md-9">
+                <h4 class="text-left">@Html.DisplayFor(model => model.Customer.FirstName)</h4>
+                <h4 class="phone_desc text-left">@Html.DisplayFor(model => model.Address)</h4>
+                <h4 class="phone_desc text-left">@Html.DisplayFor(model => model.City)</h4>
+                <h4 class="phone_desc text-left">@Html.DisplayFor(model => model.State)</h4>
+                <h4 class="phone_desc text-left">@Html.DisplayFor(model => model.ZipCode)</h4>
+                <h4 class="phone_desc text-left">@Html.DisplayFor(model => model.Country)</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <h4 class="phone_desc text-left">Phone: </h4>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="col-md-9">
+                <h4 class="phone_desc text-left">@Html.DisplayFor(model => model.Phone)</h4>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <h4 class="phone_desc text-left">Order Date: </h4>
+                <div class="clearfix"> </div>
+                <h4 class="phone_desc text-left">Total: </h4>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="col-md-9">
+                <h4 class="phone_desc text-left">@Html.DisplayFor(model => model.OrderDate) </h4>
+                <div class="clearfix"> </div>
+                <h4 class="phone_desc text-left">$@Html.DisplayFor(model => model.Total) </h4>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    <br/>
+    <p>
+        @*@Html.ActionLink("Continue Shopping", "Index", "Index", "Items")*@
+        <div class="col-md-1"></div>
+        <div class="col-md-2 text-left">
+            <a href="@Url.Action("Index", "Items", new {ItemId = Model.Id })" class="btn btn-primary btn-normal btn-inline btn_form button item_add item_1" target="_self">Continue Shopping</a>
+        </div>    
+    </p>
+    </div>
+        <div class="clearfix"> </div>
+    </div>

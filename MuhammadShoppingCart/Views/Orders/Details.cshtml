@@ -1,0 +1,134 @@
+﻿@model MuhammadShoppingCart.Models.Order
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Order Summary</h2>
+<hr />
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ZipCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Completed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Completed)
+        </dd>
+
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Back to Order History", "Index")
+</p>
+
+<hr />
+
+<div>
+    <h2>Order Details</h2>
+    <div class="account-in">
+        <div class="container">
+            <div class="check_box">
+                <div class="col-md-9 cart-items">
+                    @foreach (var detail in Model.OrderDetails)
+                    {
+                        <div class="cart-header">
+
+                            <div class="cart-sec simpleCart_shelfItem">
+                                <div class="cart-item cyc">
+                                    <img src="@Url.Content(detail.Item.MediaUrl)" class="img-responsive" alt="" />
+                                </div>
+                                <div class="cart-item-info">
+                                    <h3><a href="#">@detail.Item.Name</a></h3>
+                                    <ul class="qty">
+                                        <li><p>Description : @detail.Item.Description</p></li>
+                                        <li><p>Qty : @detail.Quantity</p></li>
+                                    </ul>
+                                    <div class="delivery">
+                                        <p>Price  : @detail.Item.Price</p>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

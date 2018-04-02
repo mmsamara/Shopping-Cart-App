@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="main">
+    <div class="container">
+        <ul class="content-home">
+            <li class="col-sm-4">
+                <a href=@Url.Action("MensIndex","Items") class="item-link" title="">
+                    <div class="bannerBox">
+                        <img src="~/images/w1.jpg" class="item-img" title="" alt="" width="100%" height="100%">
+                        <div class="item-html">
+                            <h3>Men's<span>Watches</span></h3>
+                            <p>Manly watches appropriate for only the manliest wrists.</p>
+                            <button>Shop now!</button>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="col-sm-4">
+                <a href=@Url.Action("WomensIndex","Items") class="item-link" title="">
+                    <div class="bannerBox">
+                        <img src="~/images/womenswatchmain.png" class="item-img" title="" alt="" width="100%" height="100%">
+                        <div class="item-html">
+                            <h3>Women's<span>Watches</span></h3>
+                            <p>Watches apropriate for the thin & delicate female wrist.</p>
+                            <button>Shop now!</button>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="col-sm-4">
+                <a href=@Url.Action("SportsIndex","Items") class="item-link" title="">
+                    <div class="bannerBox">
+                        <img src="~/images/w3.jpg" class="item-img" title="" alt="" width="100%" height="100%">
+                        <div class="item-html">
+                            <h3>Sport<span>Watches</span></h3>
+                            <p>Sport watches apropriate for all types of wrists and genders.</p>
+                            <button>Shop now!</button>
+                        </div>
+                    </div>
+                </a>
+            </li>
+
+            <div class="clearfix"> </div>
+        </ul>
+    </div>
+    <div class="middle_content">
+        <div class="container">
+            <h2 id="Welcome">Welcome</h2>
+            <p>MMS (Muhammad Marwan Samara) Watch Co. specializes in selling watches. This is the greates watch selling website on the internet. What separates this shop interface from out competitors
+            such as Amazon you ask? Well, you will find that this website utilizes a sleek shopping interface that is pixel perfect and programatically polished. Through the 
+            use of the MVC framework, this site has elevated the art of the shopping cart to a level that has never been attained by even the largest online shopping behemoths.</p>
+        </div>
+    </div>
+</div>

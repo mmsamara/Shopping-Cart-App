@@ -1,0 +1,57 @@
+﻿@model MuhammadShoppingCart.Models.RegisterViewModel
+
+<div class="account-in">
+    <div class="container">
+        @*This is telling me that everything in this form will be forwarded to the Account controller and the register action, it also says the post version.*@
+        @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+
+            <div class="register-top-grid">
+                <h2>PERSONAL INFORMATION</h2>
+                <div>
+                    <span>First Name<label>*</label></span>
+                    <input name="FirstName" type="text">
+                </div>
+                <div>
+                    <span>Last Name<label>*</label></span>
+                    <input name="LastName" type="text">
+                </div>
+                <div>
+                    <span>Display Name<label>*</label></span>
+                    <input name="DisplayName" type="text">
+                </div>
+                <div>
+                    <span>Email Address<label>*</label></span>
+                    <input name="Email" type="text">
+                </div>
+               
+            </div>
+            <div class="clearfix"> </div>
+            <div class="register-bottom-grid">
+                <h2>LOGIN INFORMATION</h2>
+                <div>
+                    <span>Password<label>*</label></span>
+                    <input name="Password" type="password">
+                </div>
+                <div>
+                    <span>Confirm Password<label>*</label></span>
+                    <input name="ConfirmPassword" type="password">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"> </div>
+            <div class="register-but">
+                    <input name="template" type="submit" value="Register">
+                    <div class="clearfix"> </div>
+            </div>
+        }
+      
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

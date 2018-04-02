@@ -1,0 +1,68 @@
+﻿@model MuhammadShoppingCart.Models.Order
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Submit Order</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <section id="loginForm">
+            @using (Html.BeginForm("Create", "Orders", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="account-in">
+                    <div class="container">
+                        <h3>Shipping Information</h3>
+                        <div class="col-md-7 account-top">
+                            <div>
+                                <span>Address</span>
+                                <input name="Address" type="text">
+                            </div>
+                            <div>
+                                <span>City</span>
+                                <input name="City" type="text">
+                            </div>
+                            <div>
+                                <span>State</span>
+                                <input name="State" type="text">
+                            </div>
+                            <div>
+                                <span>Zip Code</span>
+                                <input name="ZipCode" type="text">
+                            </div>
+                            <div>
+                                <span>Country</span>
+                                <input name="Country" type="text">
+                            </div>
+                            <div>
+                                <span>Phone</span>
+                                <input name="Phone" type="text">
+
+                                <div class="clearfix"> </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-8">
+                                        <input name="template" type="submit" value="Submit">
+                                        <a name="template" class="btn btn-default" href=@Url.Action("Index", "ShoppingCart")>Back to Cart</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @* Enable this once you have account confirmation enabled for password reset functionality
+                    <p>
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </p>*@
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

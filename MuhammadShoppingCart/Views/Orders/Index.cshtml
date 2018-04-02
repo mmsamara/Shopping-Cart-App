@@ -1,0 +1,85 @@
+﻿@model IEnumerable<MuhammadShoppingCart.Models.Order>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Completed)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var order in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => order.Customer.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => order.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => order.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => order.State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => order.ZipCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => order.Country)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => order.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => order.OrderDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => order.Total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => order.Completed)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=order.Id }) 
+        </td>
+    </tr>
+}
+
+</table>

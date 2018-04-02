@@ -1,0 +1,94 @@
+﻿@model IEnumerable<MuhammadShoppingCart.Models.ShoppingCart>
+
+@using MuhammadShoppingCart.Helper
+
+<div class="account-in">
+    <div class="container">
+        <div class="check_box">
+            <div class="col-md-9 cart-items">
+                <h1>My Shopping Cart (@CartHelper.CartCount())</h1>
+                
+                @foreach(var cart in Model)
+                {
+                    <div class="cart-header">
+                    <div class="close1"> </div>
+                    <div class="cart-sec simpleCart_shelfItem">
+                        <div class="cart-item cyc">
+                            <img src="@Url.Content(@cart.Item.MediaUrl)" class="img-responsive" alt="" />
+                        </div>
+                        <div class="cart-item-info">
+                            <h3><a href="#">@cart.Item.Name</a><span>@cart.Item.Description</span></h3>
+                            <ul class="qty">
+                                <li><p>Qty : @cart.Count</p></li>
+                            </ul>
+                            <div class="delivery">
+                                <p>Price : @cart.Item.Price</p> 
+                                <span>Delivered in 2-3 business days</span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div>@Html.ActionLink("Remove Item", "Delete", "ShoppingCarts", new { id = cart.Id }, null)</div>
+                        <div class="clearfix"></div>
+                    </div>
+                    </div>
+                }
+                
+            </div>
+            <div class="col-md-3 cart-total">
+                @{
+                    //**Ternary Operator, is a way for me to write an if statement in one line and set a variable based on evaluation of a condition
+                    //"If Model.Count() > 0, then set delivery = 150m else set deliver = 0m
+                    var delivery = Model.Count() > 0 ? 10m : 0m;
+                    var total = CartHelper.CalcCartTotal() + delivery;
+                }
+                <a class="continue" href="@Url.Action("Index","Items")">Continue Shopping</a>
+                @*Inserting this Url.Action above is the same as replacing the line with this:
+                @Html.ActionLink("Continue Shopping", "Index", "Items", null, new { @class="continue"})*@
+                <div class="price-details">
+                    <h3>Price Details</h3>
+                    <span>Total</span>
+                    <span class="total1">$@CartHelper.CalcCartTotal()</span>
+                    <span>Discount</span>
+                    <span class="total1">---</span>
+                    <span>Delivery Charges</span>
+                    <span class="total1">$@delivery</span>
+                    <div class="clearfix"></div>
+                </div>
+                <ul class="total_price">
+                    <li class="last_price"> <h4>TOTAL</h4></li>
+                    @*TODO: Figure out how to add 150.00 with a mathematical calculation, not string concatination*@
+                   
+                    <li class="last_price"><span>$@total</span></li>
+                    <div class="clearfix"> </div>
+                </ul>
+                <div class="clearfix"></div>
+                @*You can 1. Take over the existing <a> tag
+                             2. Recreate the <a> tag*@
+                <a class="order" href=@Url.Action("Create","Orders")>Proceed to Checkout</a>
+                @*@Html.ActionLink("Proceed to Checkout", "Create", "Orders", null, new { @class="order"})*@
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+<script>
+    $(document).ready(function(c) {
+		$('.close1').on('click', function(c){
+			$('.cart-header').fadeOut('slow', function(c){
+				$('.cart-header').remove();
+			});
+		});
+	});
+</script>
+<script>
+    $(document).ready(function (c) {
+        $('.close2').on('click', function (c) {
+            $('.cart-header2').fadeOut('slow', function (c) {
+                $('.cart-header2').remove();
+            });
+        });
+    });
+</script>
+}
